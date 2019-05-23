@@ -1,0 +1,36 @@
+<html>
+<body>
+	<h1>test.html</h1>
+</body>
+    <script>
+
+const request1 = new Request('http://localhost:8081',{})
+const request2 = new Request('http://localhost:8082',{})
+
+console.log("Making a fetch request...")
+fetch(request1)
+.then((response) => 
+{
+    console.log('Request success: ', response);
+    response.json().then((data) => {
+        console.log(data);
+    });
+})
+.catch(function (error) {  
+  console.log('Request failure: ', error);  
+});
+
+console.log("Making a fetch request...")
+fetch(request2)
+.then((response) => 
+{
+    console.log('Request success: ', response);
+    response.json().then((data) => {
+        console.log(data);
+    });
+})
+.catch(function (error) {  
+  console.log('Request failure: ', error);  
+});
+    </script>
+</html>

@@ -1,0 +1,9 @@
+mongod
+mongo
+use movies_db
+show collections
+db.movies.find()
+
+If you get error 48 try the following in `mongo` shell:
+use admin
+db.shutdownServer()

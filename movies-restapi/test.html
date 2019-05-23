@@ -1,0 +1,62 @@
+<html>
+<body>
+	<h1>test.html</h1>
+</body>
+    <script>
+
+
+const request = new Request("http://localhost:3000/movies",
+{
+  mode: 'no-cors',
+  method: 'POST',
+  body: JSON.stringify({
+    name: 'Mission Impossible',
+    description: '_',
+    cover_image: '_'
+  })
+});
+
+console.log("Making a fetch request...")
+
+fetch(request)
+.then((response) => 
+{
+    console.log('Request success: ', response);
+    response.json().then((data) => {
+        console.log(data);
+    })
+})
+.catch(function (error) {  
+  console.log('Request failure: ', error);  
+});
+
+
+console.log("Making a fetch request...")
+
+fetch('http://localhost:3000/movies', {  
+    
+    //If don't set mode='no-cors' browser will complain but it still works
+    //If you do set it, it still complains, perhaps because of the repsonse?
+    //Note, Postman doesn't handle CORS (that is partly a browser imposed restriction)
+    mode: 'no-cors',
+    method: 'POST',  
+    body: JSON.stringify({
+        name: 'Bladerunner',
+        description: '-',
+        cover_image: '-'
+      }
+    )
+})
+.then(function (data) {  
+  console.log('Request success: ', data);  
+})  
+.catch(function (error) {  
+  console.log('Request failure: ', error);  
+});
+
+
+
+
+    </script>
+</html>
+

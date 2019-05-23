@@ -1,0 +1,16 @@
+(Program works slightly differently, but if you get the right ports in the command below it will work)
+
+# Original documentation from repo
+
+go run cors-test.go
+curl -D - -H 'Origin: http://foo.com' http://localhost:8080/
+
+Should receive:
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Content-Type: application/json
+Vary: Origin
+Date: Thu, 23 May 2019 20:11:00 GMT
+Content-Length: 18
+
+{"hello": "world"}%
