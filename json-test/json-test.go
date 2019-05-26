@@ -69,14 +69,14 @@ func weatherHandler(w http.ResponseWriter, r *http.Request) {
 
 func server() {
 	http.HandleFunc("/", weatherHandler)
-	http.ListenAndServe(":8088", nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func client() {
 
 	locJson, err := json.Marshal(loc{Lat: 35.14326, Lon: -116.104})
 
-	req, err := http.NewRequest("POST", "http://localhost:8088", bytes.NewBuffer(locJson))
+	req, err := http.NewRequest("POST", "http://localhost:8080", bytes.NewBuffer(locJson))
 	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
@@ -91,6 +91,7 @@ func client() {
 }
 
 func main() {
+	log.Println("Serving on port 8080")
 	go server()
 	client()
 }
