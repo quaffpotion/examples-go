@@ -13,7 +13,11 @@ import (
 )
 
 func myHandler (w http.ResponseWriter, r *http.Request) {
-	log.Println("Handling request...")
+	log.Println("> Handling request...")
+	if (*r).Method == "OPTIONS" {
+		log.Println(">> Handling options...")
+		return
+	}
 
 }
 
