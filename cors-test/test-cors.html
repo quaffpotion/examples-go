@@ -4,8 +4,6 @@
 </body>
     <script>
 
-const request1 = new Request('http://localhost:8001',{})
-const request2 = new Request('http://localhost:8002',{})
 const reqParams = {
     headers: {
         "content-type" : "application/json; charset=UTF-8",
@@ -16,9 +14,11 @@ const reqParams = {
     },
     method: "POST"
 }
+const request1 = new Request('http://localhost:8001',reqParams)
+const request2 = new Request('http://localhost:8002',reqParams)
 
-console.log("Making a fetch request...")
-fetch(request1, reqParams)
+console.log("Making a fetch request...", request1, reqParams)
+fetch(request1)
 .then((response) => 
 {
     console.log('Request success: ', response);
@@ -30,8 +30,8 @@ fetch(request1, reqParams)
   console.log('Request failure: ', error);  
 });
 
-console.log("Making a fetch request...")
-fetch(request2, reqParams)
+console.log("Making a fetch request...", request2, reqParams)
+fetch(request2)
 .then((response) => 
 {
     console.log('Request success: ', response);
