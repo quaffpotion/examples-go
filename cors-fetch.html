@@ -1,0 +1,32 @@
+<html>
+<body>
+	<h1>test fetch request</h1>
+</body>
+    <script>
+const reqParams = {
+    headers: {
+        "content-type" : "application/json",
+    },
+    body: {
+        test: "John Doe",
+    },
+    method: "POST",
+	//mode: "no-cors" --> actually gets to the server
+	//mode: "no-cors",
+}
+const request = new Request('http://localhost:8000', reqParams)
+console.log("Making a fetch request...", request, reqParams)
+fetch(request)
+.then((response) => 
+{
+    console.log('Request success: ', response);
+    response.json().then((data) => {
+        console.log(data);
+    });
+})
+.catch(function (error) {  
+  console.log('Request failure: ', error);  
+});
+
+</script>
+</html>

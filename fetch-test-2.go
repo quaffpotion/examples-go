@@ -1,5 +1,5 @@
-// curl -H "Origin: http://example.com" -H "Access-Control-Request-Method: POST" -H "Access-Control-Request-Headers: X-Requested-With" -X OPTIONS --verbose localhost:8080
-
+// curl -H "Origin: http://example.com" -H "Access-Control-Request-Method: POST" -H "Access-Control-Request-Headers: X-Requested-With" -X OPTIONS --verbose localhost:8000
+//cf: https://stackoverflow.com/questions/42153963/allowing-origins-using-gorilla-handlers
 
 package main
 
@@ -23,7 +23,7 @@ func main() {
 
     router.HandleFunc("/", handleEndpoint)
 
-    log.Fatal(http.ListenAndServe(":8080", 
+    log.Fatal(http.ListenAndServe(":8000", 
         handlers.LoggingHandler(os.Stdout, handlers.CORS(
             handlers.AllowedMethods([]string{"POST"}),
             handlers.AllowedOrigins([]string{"*"}),
