@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/rs/cors"
@@ -23,14 +24,14 @@ func main() {
 		w.Write([]byte("{\"hello\": \"world 1\"}"))
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
-		// myDecoder := json.NewDecoder(r.Body)
+		myDecoder := json.NewDecoder(r.Body)
 
-		// var t test_struct
-		// err := myDecoder.Decode(&t)
-		// if err != nil {
-		// 	panic(err)
-		// }
-		// log.Println(t.Test)
+		var t test_struct
+		err := myDecoder.Decode(&t)
+		if err != nil {
+			panic(err)
+		}
+		log.Println(t.Test)
 
 		// body, err := ioutil.ReadAll(r.Body)
 		// if err != nil {
@@ -51,14 +52,14 @@ func main() {
 		w.Write([]byte("{\"hello\": \"world 2\"}"))
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
-		// myDecoder := json.NewDecoder(r.Body)
+		myDecoder := json.NewDecoder(r.Body)
 
-		// var t test_struct
-		// err := myDecoder.Decode(&t)
-		// if err != nil {
-		// 	panic(err)
-		// }
-		// log.Println(t.Test)
+		var t test_struct
+		err := myDecoder.Decode(&t)
+		if err != nil {
+			panic(err)
+		}
+		log.Println(t.Test)
 
 		// body, err := ioutil.ReadAll(r.Body)
 		// if err != nil {
