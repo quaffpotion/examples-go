@@ -28,5 +28,5 @@ func parseGhPost(rw http.ResponseWriter, request *http.Request) {
 
 func main() {
     http.HandleFunc("/", parseGhPost)
-    panic(http.ListenAndServe(":8081", nil))
+    panic(http.ListenAndServe(":8000", nil))
 }
