@@ -7,38 +7,41 @@ import (
 )
 
 func main() {
+
+	finish := make(chan bool)
+
 	mux1 := http.NewServeMux()
 	mux1.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("{\"hello\": \"world\"}"))
+		w.Write([]byte("{\"hello\": \"world 1\"}"))
 	})
 	mux2 := http.NewServeMux()
 	mux2.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		w.Write([]byte("{\"hello\": \"world\"}"))
+		w.Write([]byte("{\"hello\": \"world 2\"}"))
 	})
 
 	// cors.Default() setup the middleware with default options being
-	// all origins accepted with simple methods (GET, POST). See
-	// documentation below for more options.
+	// all origins accepted with simple methods (GET, POST).
 	handler1 := cors.Default().Handler(mux1)
 
-c := cors.New(cors.Options{
-    AllowedOrigins: []string{""},
-    AllowCredentials: true,
-    // Enable Debugging for testing, consider disabling in production
-    Debug: true,
-})
+	//c below takes the place of cors.Default() but doesn't allow any origins
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{""},
+		AllowCredentials: true,
+		// Enable Debugging for testing, consider disabling in production
+		Debug: true,
+	})
+	handler2 := c.Handler(mux2)
 
-	handler2 := c.Handler(mux2) 
+	go func() {
+		http.ListenAndServe(":8001", handler1)
+	}()
 
-	
-	//probably not the correct way to run things? e.g. maybe goroutines
+	go func() {
+		http.ListenAndServe(":8002", handler2)
+	}()
 
-	//handler1 has default CORS options so browser will show response
-	http.ListenAndServe(":8081", handler1)
-
-	//handler2 has no CORS so browser will prevent it
-	http.ListenAndServe(":8082", handler2)
+	<-finish
 
 }

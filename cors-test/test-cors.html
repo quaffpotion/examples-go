@@ -4,11 +4,21 @@
 </body>
     <script>
 
-const request1 = new Request('http://localhost:8081',{})
-const request2 = new Request('http://localhost:8082',{})
+const request1 = new Request('http://localhost:8001',{})
+const request2 = new Request('http://localhost:8002',{})
+const reqParams = {
+    headers: {
+        "content-type" : "application/json; charset=UTF-8",
+    },
+    body: {
+        name: "John Doe",
+        age: "52"
+    },
+    method: "POST"
+}
 
 console.log("Making a fetch request...")
-fetch(request1)
+fetch(request1, reqParams)
 .then((response) => 
 {
     console.log('Request success: ', response);
@@ -21,7 +31,7 @@ fetch(request1)
 });
 
 console.log("Making a fetch request...")
-fetch(request2)
+fetch(request2, reqParams)
 .then((response) => 
 {
     console.log('Request success: ', response);
