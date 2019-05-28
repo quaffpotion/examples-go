@@ -16,5 +16,5 @@ func main() {
 	methods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
 	origins := handlers.AllowedOrigins([]string{"*"})
 	router.HandleFunc("/", RootEndpoint)
-	http.ListenAndServe(":8081", handlers.CORS(headers, methods, origins)(router))
+	http.ListenAndServe(":8000", handlers.CORS(headers, methods, origins)(router))
 }

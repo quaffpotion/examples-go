@@ -8,6 +8,7 @@ const reqParams = {
         "content-type" : "application/json",
 	    "Access-Control-Allow-Origin" : "*",
 	    "Vary" : "Origin",
+	    "Origin" : "http://examples.com",
     },
     body: {
         test: "John Doe",
@@ -29,6 +30,11 @@ fetch(request)
 .catch(function (error) {  
   console.log('Request failure: ', error);  
 });
-
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "https://localhost:8000"; // site that doesn’t send Access-Control-*
+fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+.then(response => response.text())
+.then(contents => console.log(contents))
+.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 </script>
 </html>
